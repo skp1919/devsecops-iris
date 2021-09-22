@@ -99,7 +99,7 @@ jobs:
           name: code-release
           path: release.zip
       - name: Upload SARIF file
-        uses: actions/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v1
         with:
            # Path to SARIF file relative to the root of the repository
            sarif_file: results.sarif
