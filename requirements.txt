@@ -5,3 +5,5 @@ requests==2.25.1
 pandas==1.2.4
 scikit-learn==0.24.1
 codecov
+bandit
+bandit_sarif_formatter
