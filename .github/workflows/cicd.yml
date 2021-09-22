@@ -80,10 +80,7 @@ jobs:
           path: ./results.sarif
   
   upload_zip:
-    runs-on: ${{ matrix.os }} # choose the OS for running the action
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ubuntu-latest # choose the OS for running the action
     needs: 
       - unittest
       - codecoverage
