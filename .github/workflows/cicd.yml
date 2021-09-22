@@ -82,12 +82,7 @@ jobs:
         run: |
           pip install bandit
           pip install bandit_sarif_formatter
-          bandit ./main.py --format sarif  --output ./results.sarif
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-           # Path to SARIF file relative to the root of the repository
-           sarif_file: results.sarif  
+          bandit ./main.py --format sarif  --output ./results.sarif  
   upload_zip:
     runs-on: ubuntu-latest # choose the OS for running the action
     needs: 
@@ -107,3 +102,8 @@ jobs:
         with:
           name: code-release
           path: release.zip
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+           # Path to SARIF file relative to the root of the repository
+           sarif_file: results.sarif
