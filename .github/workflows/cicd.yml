@@ -48,6 +48,11 @@ jobs:
         run: |
           pip install pytest-cov
           pytest --cov=./
+      - name: Generate sarif report
+        run: |
+          pip install bandit
+          pip install bandit_sarif_formatter
+          bandit --format sarif  --output results.sarif
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
@@ -78,6 +83,11 @@ jobs:
         with:
           name: SARIF report
           path: ./results.sarif
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+           # Path to SARIF file relative to the root of the repository
+           sarif_file: results.sarif
   
   upload_zip:
     runs-on: ubuntu-latest # choose the OS for running the action
@@ -98,8 +108,3 @@ jobs:
         with:
           name: code-release
           path: release.zip
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-           # Path to SARIF file relative to the root of the repository
-           sarif_file: results.sarif
